@@ -1,4 +1,6 @@
 TODO
+- research more on exporting each files
+- research more on how to create a response object - generic
 - make sure to use env variable for webpack config to pick the variables
 - research more on usage of typescript standards to be added for node.js
 - docker file to be added
@@ -7,4 +9,4 @@ TODO
 - more research on integration test cases
 
 Done:
-- using nodemon with node + typsscript
+- using nodemon with node + typescript

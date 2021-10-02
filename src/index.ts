@@ -1,15 +1,34 @@
-import * as express from "express";
+// common module imports
+import * as Express from "express";
+
+// internal module imports
+import { ProjectRouter } from "./api/project/route";
 
 class App {
-  public static start() {
-    const app = express();
-    app.get("/health-check", (request, response) => {
-      response.send({
-        message: "Hey bro!! its up..,,,,",
-      });
-    });
-    app.listen(3000);
+  expressApp: Express.Application;
+
+  constructor() {
+    this.expressApp = Express();
+  }
+
+  public configureRouter() {
+    this.expressApp.use("/project", ProjectRouter.router);
+  }
+
+  public configureLogger() {}
+
+  public configureCluster() {}
+
+  public intialize() {
+    this.expressApp.use(Express.json());
+    this.configureRouter();
+  }
+
+  public startListener() {
+    this.expressApp.listen(3000);
   }
 }
 
-App.start();
+const MainApp = new App();
+MainApp.intialize();
+MainApp.startListener();
