@@ -1,0 +1,6 @@
+TODO
+- make sure to use env variable for webpack config to pick the variables
+- research more on usage of typescript standards to be added for node.js
+
+Done:
+- using nodemon with node + typsscript
