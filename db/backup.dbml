@@ -1,0 +1,112 @@
+Table "project" {
+  "id" integer [pk, not null]
+  "name" varchar(100) [not null]
+  "description" varchar(100)
+  "created_by" varchar(100)
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+}
+
+Table "environment" {
+  "id" integer [pk, not null]
+  "project_id" integer [not null]
+  "name" varchar(100) [not null]
+  "key" varchar(100) [not null]
+  "description" varchar(100)
+  "created_by" varchar(100)
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+
+Indexes {
+  project_id [name: "fkIdx_36"]
+}
+}
+
+Table "feature" {
+  "id" integer [pk, not null]
+  "project_id" integer [not null]
+  "environment_id" integer [not null]
+  "name" varchar(100) [not null]
+  "key" varchar(100) [not null]
+  "description" varchar(100)
+  "created_by" varchar(100)
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+
+Indexes {
+  project_id [name: "fkIdx_77"]
+  environment_id [name: "fkIdx_84"]
+}
+}
+
+Table "version_type" {
+  "id" integer [pk, not null]
+  "type" varchar(100) [not null]
+  "description" varchar(100)
+  "is_enabled" integer [not null]
+  "created_by" varchar(100)
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+}
+
+Table "version" {
+  "id" integer [pk, not null]
+  "key" varchar(100) [not null]
+  "version_type_id" integer [not null]
+  "feature_id" integer [not null]
+  "description" varchar(100)
+  "created_by" varchar(100)
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+
+Indexes {
+  version_type_id [name: "fkIdx_114"]
+  feature_id [name: "fkIdx_99"]
+}
+}
+
+Table "feature_version" {
+  "id" integer [pk, not null]
+  "created_by" varchar(100)
+  "version_id" integer [not null]
+  "feature_id" integer [not null]
+  "created" timestamp
+  "last_modified" timestamp
+  "last_modified_by" varchar(100)
+  "deleted" timestamp
+  "deleted_by" varchar(100)
+
+Indexes {
+  feature_id [name: "fkIdx_128"]
+  version_id [name: "fkIdx_131"]
+}
+}
+
+Ref:"project"."id" < "environment"."project_id"
+
+Ref:"project"."id" < "feature"."project_id"
+
+Ref:"environment"."id" < "feature"."environment_id"
+
+Ref:"version_type"."id" < "version"."version_type_id"
+
+Ref:"feature"."id" < "version"."feature_id"
+
+Ref:"version"."id" < "feature_version"."version_id"
+
+Ref:"feature"."id" < "feature_version"."feature_id"
