@@ -1,6 +1,11 @@
-TODO
 - research more on exporting each files
-- research more on how to create a response object - generic
+- creating API documentation based on openAPIspec standards
+- research more on how to create a response object - define generic response object
+    - Success POST / PUT / DELETE
+    - Failed GET / POST / PUT / DELETE - due to bad request
+    - Failed POST - due to idempotency error
+    - Failed GET / PUT / DELETE - due to resource doesn't exist
+    - Failed due to external service unavailabiity
 - make sure to use env variable for webpack config to pick the variables
 - research more on usage of typescript standards to be added for node.js
 - docker file to be added

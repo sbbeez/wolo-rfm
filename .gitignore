@@ -106,3 +106,5 @@ dist
 # custom set up
 # removing server folder as its a generated asset
 server/
+
+notes.txt
