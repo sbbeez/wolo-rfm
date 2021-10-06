@@ -3,6 +3,11 @@
     "outDir": "./dist",
     "sourceMap": true,
     "removeComments": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    "strictNullChecks": true
   }
 }

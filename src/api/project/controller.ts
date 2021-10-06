@@ -1,7 +1,9 @@
+import { IProjectCreate } from "./type";
+import { ProjectValidator } from "./validator";
+
 class Controller {
-  async create(data: any) {
-    console.log("database", data);
-    return data;
+  async create(data: IProjectCreate) {
+    return ProjectValidator.validateProjectCreateObject(data);
   }
 }
 

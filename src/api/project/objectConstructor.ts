@@ -8,12 +8,21 @@
 import * as Express from "express";
 
 // internal modules
-import { ProjectValidator } from "./validator";
+import { ProjectController } from "./controller";
+import { IProjectCreate } from "./type";
 
 class ObjectConstructor {
-  async create(request: Express.Request, response: Express.Response) {
-    const responseData = await ProjectValidator.create(request.body);
-    response.send(responseData);
+  async create(
+    request: Express.Request<{}, {}, IProjectCreate>,
+    response: Express.Response
+  ) {
+    try {
+      await ProjectController.create(request.body);
+      response.send("success");
+    } catch (err) {
+      console.log(err);
+      response.send("error occured");
+    }
   }
 }
 
