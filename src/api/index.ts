@@ -2,7 +2,7 @@
 import * as Express from "express";
 
 // internal module imports
-import { ProjectRouter } from "./api/project/route";
+import { ProjectRouter } from "./component/project/route";
 
 class App {
   expressApp: Express.Application;
