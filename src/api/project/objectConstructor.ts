@@ -10,20 +10,26 @@ import * as Express from "express";
 // internal modules
 import { ProjectController } from "./controller";
 import { IProjectCreate } from "./type";
+import { ErrorHandler } from "../../responseHandler";
 
 class ObjectConstructor {
-  async create(
+  errorHandler: ErrorHandler;
+
+  constructor() {
+    this.errorHandler = new ErrorHandler();
+  }
+
+  create = async (
     request: Express.Request<{}, {}, IProjectCreate>,
     response: Express.Response
-  ) {
+  ) => {
     try {
-      await ProjectController.create(request.body);
-      response.send("success");
+      const data = await ProjectController.create(request.body);
+      response.send(data);
     } catch (err) {
-      console.log(err);
-      response.send("error occured");
+      response.send(this.errorHandler.handleValidationErrors(err));
     }
-  }
+  };
 }
 
 export const ProjectObjectConstructor = new ObjectConstructor();
