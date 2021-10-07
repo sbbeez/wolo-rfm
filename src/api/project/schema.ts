@@ -8,8 +8,10 @@ export const projectCreateSchema = {
     project_description: { $ref: "desc#/definitions/desc" },
     environment: {
       type: "array",
+      uniqueItemProperties: ["environment_name", "environment_key"],
       items: environmentSchema,
       minItems: 1,
+      maxItems: 5,
     },
   },
   required: ["project_name", "project_description", "environment"],

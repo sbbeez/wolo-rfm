@@ -3,7 +3,8 @@ import { ProjectValidator } from "./validator";
 
 class Controller {
   async create(data: IProjectCreate) {
-    return ProjectValidator.validateProjectCreateObject(data);
+    ProjectValidator.validateProjectCreateObject(data);
+    return { message: "Successfully created new project" };
   }
 }
 
