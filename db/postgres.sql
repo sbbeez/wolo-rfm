@@ -1,5 +1,5 @@
 CREATE TABLE project (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   name varchar(100) NOT NULL,
   description varchar(500),
   created_by varchar(100),
@@ -10,7 +10,7 @@ CREATE TABLE project (
   deleted_by varchar(100)
 );
 CREATE TABLE environment (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   project_id integer NOT NULL,
   name varchar(100) NOT NULL,
   key varchar(20) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE environment (
   deleted_by varchar(100)
 );
 CREATE TABLE feature (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   project_id integer NOT NULL,
   environment_id integer NOT NULL,
   name varchar(100) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE feature (
   deleted_by varchar(100)
 );
 CREATE TABLE version_type (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   type varchar(100) NOT NULL,
   description varchar(500),
   is_enabled integer NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE version_type (
   deleted_by varchar(100)
 );
 CREATE TABLE version (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   key varchar(20) NOT NULL,
   version_type_id integer NOT NULL,
   feature_id integer NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE version (
   deleted_by varchar(100)
 );
 CREATE TABLE feature_version (
-  id integer PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   created_by varchar(100),
   version_id integer NOT NULL,
   feature_id integer NOT NULL,
