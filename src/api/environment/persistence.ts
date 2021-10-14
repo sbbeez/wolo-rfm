@@ -28,8 +28,6 @@ class EnvironmentPersistence {
 
     const environmentResult = await environmentCreateQuery;
 
-    console.log(environmentResult);
-
     return environmentResult;
   };
 }

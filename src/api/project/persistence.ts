@@ -29,7 +29,6 @@ class Persistence {
       return resultData;
     } catch (err) {
       trx.rollback();
-      console.log("errr", "");
       throw [err];
     }
   };
@@ -38,7 +37,7 @@ class Persistence {
     const data = await dbInstance<{ id: string }>("project")
       .select("id")
       .where(dbInstance.raw("LOWER(name) = ?", project_name.toLowerCase()));
-    console.log(data);
+
     if (data.length >= 1) {
       throw [
         {
