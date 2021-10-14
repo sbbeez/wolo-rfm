@@ -27,7 +27,8 @@ class ObjectConstructor {
       const data = await ProjectController.create(request.body);
       response.send(data);
     } catch (err) {
-      response.send(this.errorHandler.handleValidationErrors(err));
+      // within handle error it should check what is the error type and handle accordingly
+      response.send(this.errorHandler.handleError(err));
     }
   };
 }

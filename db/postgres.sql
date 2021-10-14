@@ -4,7 +4,7 @@ CREATE TABLE project (
   description varchar(500),
   created_by varchar(100),
   created timestamp,
-  last_modified timestamp,
+  last_modified timestamp default now(),
   last_modified_by varchar(100),
   deleted timestamp,
   deleted_by varchar(100)
@@ -17,7 +17,7 @@ CREATE TABLE environment (
   description varchar(500),
   created_by varchar(100),
   created timestamp,
-  last_modified timestamp,
+  last_modified timestamp default now(),
   last_modified_by varchar(100),
   deleted timestamp,
   deleted_by varchar(100)
