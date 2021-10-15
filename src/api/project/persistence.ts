@@ -1,18 +1,18 @@
 import { DBInstance } from "../../database";
-import { IProjectCreate } from "./type";
+import { IProjectCreatePersistence } from "./type";
 import EnvironmentPersistence from "../environment/persistence";
 
 const { dbInstance } = DBInstance;
 
 class Persistence {
-  createNew = async (projectData: IProjectCreate) => {
+  createNew = async (projectData: IProjectCreatePersistence) => {
     // creates transactions to make sure project + environment is created
     const trx = await dbInstance.transaction();
     try {
       const projectResult = await dbInstance("project")
         .insert({
-          name: projectData.project_name,
-          description: projectData.project_description,
+          name: projectData.name,
+          description: projectData.description,
         })
         .returning(["id as project_id"])
         .transacting(trx);
@@ -33,20 +33,12 @@ class Persistence {
     }
   };
 
-  checkIfProjectAlreadyExists = async (project_name: string) => {
+  checkIfProjectAlreadyExists = async (name: string) => {
     const data = await dbInstance<{ id: string }>("project")
       .select("id")
-      .where(dbInstance.raw("LOWER(name) = ?", project_name.toLowerCase()));
+      .where(dbInstance.raw("LOWER(name) = ?", name.toLowerCase()));
 
-    if (data.length >= 1) {
-      throw [
-        {
-          error_type: "idempotent_error",
-          error_reason: `project_name ${project_name} already exists, Please choose a unique one.`,
-        },
-      ];
-    }
-    return false;
+    return data;
   };
 }
 

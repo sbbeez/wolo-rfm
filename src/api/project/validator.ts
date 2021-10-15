@@ -15,7 +15,7 @@ class Validator extends BaseValidator {
     this.projectCreateValidator = this.ajvInstance.compile(projectCreateSchema);
   }
 
-  validateProjectCreateObject(data: IProjectCreate) {
+  validateProjectCreateInput(data: IProjectCreate) {
     const isValid = this.projectCreateValidator(data);
     if (!isValid) {
       throw this.projectCreateValidator.errors;

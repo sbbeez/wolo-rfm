@@ -1,4 +1,4 @@
-import { IMetadata } from "./additionalAttributes";
+import { IMetadata } from "./common";
 
 export interface IEnvironment extends IMetadata {
   environment_name: string;
