@@ -1,4 +1,4 @@
-import { IMetadata } from "./additionalAttributes";
+import { IMetadata } from "./common";
 
 export interface IProject extends IMetadata {
   project_name: string;

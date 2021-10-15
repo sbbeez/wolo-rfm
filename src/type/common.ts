@@ -1,3 +1,12 @@
+export interface ICommonModelKey {
+  key: string;
+}
+
+export interface ICommonModel {
+  name: string;
+  description: string;
+}
+
 export interface IMetadata {
   created_by?: string;
   created?: Date;

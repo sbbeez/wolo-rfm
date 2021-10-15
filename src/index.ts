@@ -2,7 +2,7 @@
 import * as Express from "express";
 
 // internal module imports
-import { ProjectRouter } from "./api/project/route";
+import { ProjectRequestHandler } from "./api/project/route";
 
 class App {
   expressApp: Express.Application;
@@ -12,7 +12,7 @@ class App {
   }
 
   public configureRouter() {
-    this.expressApp.use("/project", ProjectRouter.router);
+    this.expressApp.use("/project", ProjectRequestHandler.requestHandler);
   }
 
   public configureLogger() {}

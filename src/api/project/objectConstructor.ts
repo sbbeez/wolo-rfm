@@ -1,35 +1,24 @@
 /**
- * This module accepts express request object and constructs required params for each route.
- * Each method corresponds to different routes.
- * Acts as a middleware to construct the object required by each object.
- * Once the object is constructed from request, invokes other middlewares if any.
+ * Focued only to do transformations
  */
-// external modules installed using npm
-import * as Express from "express";
 
-// internal modules
-import { ProjectController } from "./controller";
-import { IProjectCreate } from "./type";
-import { ErrorHandler } from "../../responseHandler";
+import { IProjectCreate, IProjectCreatePersistence } from "./type";
 
 class ObjectConstructor {
-  errorHandler: ErrorHandler;
-
-  constructor() {
-    this.errorHandler = new ErrorHandler();
-  }
-
-  create = async (
-    request: Express.Request<{}, {}, IProjectCreate>,
-    response: Express.Response
-  ) => {
-    try {
-      const data = await ProjectController.create(request.body);
-      response.send(data);
-    } catch (err) {
-      // within handle error it should check what is the error type and handle accordingly
-      response.send(this.errorHandler.handleError(err));
-    }
+  projectCreateNewPersistence = (
+    projectData: IProjectCreate
+  ): IProjectCreatePersistence => {
+    return {
+      name: projectData.project_name,
+      description: projectData.project_description,
+      environment: projectData.environment.map((item) => {
+        return {
+          name: item.environment_name,
+          key: item.environment_key,
+          description: item.environment_description,
+        };
+      }),
+    };
   };
 }
 
